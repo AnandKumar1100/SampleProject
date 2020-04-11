@@ -16,8 +16,13 @@ export default class FirstScreen extends Component {
     }
 
     componentDidMount() {
-        debugger
         this.props.callAPI()
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (!this.state.value && prevState.value) {
+            this.setState({ filteredList: undefined})
+        }
     }
 
     _keyExtractor = (item, index) => String(index);
@@ -50,7 +55,7 @@ export default class FirstScreen extends Component {
         }
         const filteredList = this.props.list.filter((eachItem) => {
             console.log(eachItem.title.indexOf(this.state.value))
-            if ((eachItem.title && eachItem.title.indexOf(this.state.value) > -1) || (eachItem.author && eachItem.author.indexOf(this.state.value) > -1) || (eachItem.url && eachItem.url.indexOf(this.state.value) > -1)) {
+            if ((eachItem.title && eachItem.title.toLowerCase().indexOf(this.state.value.toLowerCase()) > -1) || (eachItem.author && eachItem.author.toLowerCase().indexOf(this.state.value.toLowerCase()) > -1) || (eachItem.url && eachItem.url.toLowerCase().indexOf(this.state.value.toLowerCase()) > -1)) {
                 return eachItem
             }
         })
@@ -64,7 +69,7 @@ export default class FirstScreen extends Component {
         }
         const filteredList = this.props.list.filter((eachItem) => {
             console.log(eachItem.title.indexOf(this.state.value))
-            if ((eachItem.title && eachItem.title.indexOf(this.state.value) > -1) || (eachItem.created_at && eachItem.created_at.indexOf(this.state.value))) {
+            if ((eachItem.title && eachItem.title.toLowerCase().indexOf(this.state.value.toLowerCase()) > -1) || (eachItem.created_at && eachItem.created_at.toLowerCase().indexOf(this.state.value.toLowerCase()) > -1)) {
                 return eachItem
             }
         })
