@@ -1,8 +1,9 @@
 'Use Strict';
 
 import React, { Component } from 'react';
-import { View, FlatList, Text } from 'react-native'
+import { View, FlatList, Text, TouchableOpacity } from 'react-native'
 import {Styles} from "./styles";
+import ModalScreen from './ModalScreen';
 
 export default class FirstScreen extends Component {
 
@@ -31,15 +32,7 @@ export default class FirstScreen extends Component {
     }
 
     _renderData = ({ item, index }) => {
-        return (<View style={{flexDirection:'row', borderWidth: 1, borderColor:'black'}}>
-            <Text style={{ flex: 0.25, paddingLeft: 5 }}>{item.title}</Text>
-            <View style={{width: 2, backgroundColor:'black'}}/>
-            <Text style={{ flex: 0.25, paddingLeft: 5 }}>{item.url}</Text>
-            <View style={{width: 2, backgroundColor:'black'}}/>
-            <Text style={{ flex: 0.25, paddingLeft: 5 }}>{item.created_at}</Text>
-            <View style={{width: 2, backgroundColor:'black'}}/>
-            <Text style={{flex: 0.25, paddingLeft: 5}}>{item.author}</Text>
-        </View>)
+        return (<ModalScreen data={item} />);
     }
 
     _renderEmptyData = () => {
