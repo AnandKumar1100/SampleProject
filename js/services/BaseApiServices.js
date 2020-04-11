@@ -30,7 +30,6 @@ const callApi = (requestMethod, url, headers = getHeaders()) => {
             const statusCode = response.status;
             return new Promise((resolve, reject) => {
                 response.json().then((response) => {
-                    debugger
                     resolve(response);
                 }).catch((error) => {
                     console.log("result ", error);
@@ -38,7 +37,6 @@ const callApi = (requestMethod, url, headers = getHeaders()) => {
                 });
             });
         }).catch((error) => {
-            debugger
             console.log("error ", error)
         });
 };

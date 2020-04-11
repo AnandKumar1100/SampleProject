@@ -18,7 +18,7 @@ export default class FirstScreen extends Component {
     _keyExtractor = (item, index) => String(index);
 
     loadMore = () => {
-        
+        this.props.callAPI()
     }
 
     _getHeader = () => {
