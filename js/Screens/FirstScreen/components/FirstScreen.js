@@ -27,20 +27,20 @@ export default class FirstScreen extends Component {
     }
 
     _getHeader = () => {
-        return (<View style={{flexDirection:'row'}}>
-            <Text style={{ flex: 0.25, textAlign: 'center'}}>Title</Text>
-            <Text style={{flex: 0.25, textAlign: 'center'}}>Url</Text>
-            <Text style={{flex: 0.25, textAlign: 'center'}}>Date</Text>
-            <Text style={{flex: 0.25, textAlign: 'center'}}>Author</Text>
+        return (<View style={Styles.flexDirection_row}>
+            <Text style={Styles.cellText}>Title</Text>
+            <Text style={Styles.cellText}>Url</Text>
+            <Text style={Styles.cellText}>Date</Text>
+            <Text style={Styles.cellText}>Author</Text>
         </View>)
     }
 
     _renderData = ({ item, index }) => {
-        return (<ModalScreen data={item} />);
+        return (<View><ModalScreen data={item} /></View>);
     }
 
     _renderEmptyData = () => {
-        return(<View style={{flex:1, justifyContent:'center', alignItems:'center'}}><Text style={{fontSize: 20, fontWeight:'bold'}}>No data to show</Text></View>)
+        return(<View style={Styles.emptyDataContainer}><Text style={Styles.emptyDataText}>No data to show</Text></View>)
     }
 
     searchItem = () => {
@@ -57,6 +57,10 @@ export default class FirstScreen extends Component {
         this.setState({ filteredList })
     }
 
+    handleFilter = () => {
+        
+    }
+
     handleOnChangeText = (value) => {
         this.setState({ value })
     }
@@ -65,12 +69,12 @@ export default class FirstScreen extends Component {
         const { list } = this.props;
         const { filteredList, value } = this.state;
         return (<View style={Styles.fill}>
-            <View style={{ height: 50, flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: 'black', marginBottom: 15 }}>
-                <View style={{flexDirection:'row', flex: 0.50, justifyContent:'center', alignItems:'center'}}>
-                    <TextInput style={{ height: 40, borderColor: 'gray', borderWidth: 1, flex: 1 }} onChangeText={this.handleOnChangeText}/>
-                    <TouchableOpacity onPress={this.searchItem} style={{ flex: 0.50}}><Text>Search</Text></TouchableOpacity>
+            <View style={Styles.headerBtnContainer}>
+                <View style={Styles.searchBtnContainer}>
+                    <TextInput style={Styles.textInput} onChangeText={this.handleOnChangeText}/>
+                    <TouchableOpacity onPress={this.searchItem}><Text>Search</Text></TouchableOpacity>
                 </View>
-                <TouchableOpacity style={{flex: 0.50, justifyContent:'center', alignItems:'center'}}><Text>Filter</Text></TouchableOpacity>
+                <TouchableOpacity onPress={this.handleFilter} style={{flex: 0.50, justifyContent:'center', alignItems:'center'}}><Text>Filter</Text></TouchableOpacity>
             </View>
             <FlatList
                 data={filteredList && value ? filteredList : list}
