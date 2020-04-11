@@ -1,4 +1,4 @@
-import { call, put, select, take, takeLatest } from 'redux-saga/effects';
+import { put, select, takeLatest, delay } from 'redux-saga/effects';
 import { Api } from "./API";
 import {
     CALL_API,
@@ -8,14 +8,15 @@ import {
 function* watchCallAPI(action) {
     try {
         const state = yield select((state) => state);
-        debugger
         let page = state.FirstScreenReducer.pageNo
         let data = yield Api.callAPI(page);
-        debugger
         yield put({ type: SAVE_API_RESPONSE, data: data.hits, pageNo: page + 1 })
-        debugger
+        
+        // Call API after 10 sec.
+        yield delay(10000);
+        yield put({ type: CALL_API })
     } catch (error) {
-        // Todo: Handle Error
+        alert('An error occured')
     }
 }
 

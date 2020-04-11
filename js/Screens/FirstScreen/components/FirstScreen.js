@@ -31,7 +31,6 @@ export default class FirstScreen extends Component {
     }
 
     _renderData = ({ item, index }) => {
-        debugger
         return (<View style={{flexDirection:'row', borderWidth: 1, borderColor:'black'}}>
             <Text style={{ flex: 0.25, paddingLeft: 5 }}>{item.title}</Text>
             <View style={{width: 2, backgroundColor:'black'}}/>

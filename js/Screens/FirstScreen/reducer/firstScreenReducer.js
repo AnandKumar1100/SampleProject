@@ -17,7 +17,6 @@ const FirstScreenReducer = (state = initialState, action) => {
                 ...state
             }
         case SAVE_API_RESPONSE: {
-            debugger
             return {
                 ...state,
                 list: [...state.list, ...action.data],

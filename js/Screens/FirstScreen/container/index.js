@@ -13,7 +13,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         callAPI: () => {
-            debugger
             dispatch(callAPI())
         }
     }
