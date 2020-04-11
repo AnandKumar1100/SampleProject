@@ -42,7 +42,7 @@ export default class ModalScreen extends React.Component {
     render() {
         const { data } = this.props
         return (
-            <>
+            <View style={{flex:1}}>
                 <TouchableOpacity style={{ flexDirection: 'row', borderWidth: 1, borderColor: 'black' }} onPress={this.toggleModalVisiblity}>
                     <Text style={{ flex: 0.25, paddingLeft: 5 }}>{data.title}</Text>
                     <View style={{ width: 2, backgroundColor: 'black' }} />
@@ -53,7 +53,7 @@ export default class ModalScreen extends React.Component {
                     <Text style={{ flex: 0.25, paddingLeft: 5 }}>{data.author}</Text>
                 </TouchableOpacity>
                 {this.renderModal()}
-            </>
+            </View>
         );
     }
 }

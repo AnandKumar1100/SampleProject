@@ -1,7 +1,7 @@
 'Use Strict';
 
 import React, { Component } from 'react';
-import { View, FlatList, Text, TouchableOpacity } from 'react-native'
+import { View, FlatList, Text, TouchableOpacity, TextInput } from 'react-native'
 import {Styles} from "./styles";
 import ModalScreen from './ModalScreen';
 
@@ -9,6 +9,10 @@ export default class FirstScreen extends Component {
 
     constructor(props) {
         super(props)
+        this.state = {
+            value: undefined,
+            filteredList: undefined
+        }
     }
 
     componentDidMount() {
@@ -39,11 +43,37 @@ export default class FirstScreen extends Component {
         return(<View style={{flex:1, justifyContent:'center', alignItems:'center'}}><Text style={{fontSize: 20, fontWeight:'bold'}}>No data to show</Text></View>)
     }
 
+    searchItem = () => {
+        if (this.props.list.length == 0 || !this.state.value) {
+            alert('No Items')
+            return
+        }
+        const filteredList = this.props.list.filter((eachItem) => {
+            console.log(eachItem.title.indexOf(this.state.value))
+            if ((eachItem.title && eachItem.title.indexOf(this.state.value) > -1) || (eachItem.author && eachItem.author.indexOf(this.state.value) > -1) || (eachItem.url && eachItem.url.indexOf(this.state.value) > -1)) {
+                return eachItem
+            }
+        })
+        this.setState({ filteredList })
+    }
+
+    handleOnChangeText = (value) => {
+        this.setState({ value })
+    }
+
     render() {
         const { list } = this.props;
+        const { filteredList, value } = this.state;
         return (<View style={Styles.fill}>
+            <View style={{ height: 50, flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: 'black', marginBottom: 15 }}>
+                <View style={{flexDirection:'row', flex: 0.50, justifyContent:'center', alignItems:'center'}}>
+                    <TextInput style={{ height: 40, borderColor: 'gray', borderWidth: 1, flex: 1 }} onChangeText={this.handleOnChangeText}/>
+                    <TouchableOpacity onPress={this.searchItem} style={{ flex: 0.50}}><Text>Search</Text></TouchableOpacity>
+                </View>
+                <TouchableOpacity style={{flex: 0.50, justifyContent:'center', alignItems:'center'}}><Text>Filter</Text></TouchableOpacity>
+            </View>
             <FlatList
-                data={list}
+                data={filteredList && value ? filteredList : list}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={this._keyExtractor}
                 ListHeaderComponent={this._getHeader}
