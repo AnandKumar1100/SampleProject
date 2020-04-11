@@ -58,7 +58,17 @@ export default class FirstScreen extends Component {
     }
 
     handleFilter = () => {
-        
+        if (this.props.list.length == 0 || !this.state.value) {
+            alert('No Items')
+            return
+        }
+        const filteredList = this.props.list.filter((eachItem) => {
+            console.log(eachItem.title.indexOf(this.state.value))
+            if ((eachItem.title && eachItem.title.indexOf(this.state.value) > -1) || (eachItem.created_at && eachItem.created_at.indexOf(this.state.value))) {
+                return eachItem
+            }
+        })
+        this.setState({ filteredList })
     }
 
     handleOnChangeText = (value) => {
