@@ -1,16 +1,22 @@
 import {connect} from "react-redux";
 import FirstScreen from "../components/FirstScreen";
 import {
+    callAPI
 } from "../actions";
 
-// const mapStateToProps = (state) => {
-//     return {
-//     };
-// };
+const mapStateToProps = (state) => {
+    return {
+        list : state.FirstScreenReducer.list
+    };
+};
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//     }
-// };
+const mapDispatchToProps = (dispatch) => {
+    return {
+        callAPI: () => {
+            debugger
+            dispatch(callAPI())
+        }
+    }
+};
 
-export default connect(null, null)(FirstScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(FirstScreen);
