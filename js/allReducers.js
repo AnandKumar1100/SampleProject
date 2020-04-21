@@ -1,12 +1,12 @@
 'Use Strict';
 
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 
 const allReducers = () => {
-    const FirstScreenReducer = require("./Screens/FirstScreen/reducer/firstScreenReducer").default;
+    const HomeScreenReducer = require("./Screens/HomeScreen/reducer/homeScreenReducer").default;
 
     return combineReducers({
-        FirstScreenReducer
+        HomeScreenReducer
     })
 };
 
