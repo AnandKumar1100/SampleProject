@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Modal, Button } from 'react-native'
-
+import { Styles } from "./styles";
 export default class Dropdown extends Component {
 
     constructor(props) {
@@ -34,19 +34,18 @@ export default class Dropdown extends Component {
 
     dropDownModal = () => {
         const { selectedLanguage } = this.props;
-        return(<Modal
+        return (<Modal
             animationType="slide"
             transparent
-            visible={this.state.isDropDownVisible}
-        >
-            <TouchableOpacity activeOpacity={1} style={{ flex: 1, justifyContent: 'flex-end' }} onPress={this.toggleDropDown}>
-                <View style={{backgroundColor:'rgba(0,0,0,0.6)', flex:1}}/>
-                <View style={{ backgroundColor: 'white', paddingHorizontal: 24 }}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 16, paddingVertical: 24 }}>Select Language</Text>
-                    <TouchableOpacity onPress={()=>this.onChangeLanguage('English')} hitSlop={{top: 10, bottom: 10}} style={{marginBottom: 24}}><Text style={{fontSize: 16, color: selectedLanguage === 'English' ? 'green' : 'black'}}>English</Text></TouchableOpacity>
-                    <TouchableOpacity onPress={()=>this.onChangeLanguage('Hindi')} hitSlop={{top: 10, bottom: 10}} style={{marginBottom: 24}}><Text style={{fontSize: 16, color: selectedLanguage === 'Hindi' ? 'green' : 'black' }}>Hindi</Text></TouchableOpacity>
+            visible={this.state.isDropDownVisible}>
+            <View style={Styles.fill}>
+                <TouchableOpacity activeOpacity={1} style={Styles.modalBackground} onPress={this.toggleDropDown} />
+                <View style={Styles.dropdownContainer}>
+                    <Text style={Styles.dropdownTitle}>Select Language</Text>
+                    <TouchableOpacity onPress={() => this.onChangeLanguage('English')} hitSlop={{ top: 10, bottom: 10 }} style={Styles.dropdownItem}><Text style={{ fontSize: 16, color: selectedLanguage === 'English' ? 'green' : 'black' }}>English</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.onChangeLanguage('Hindi')} hitSlop={{ top: 10, bottom: 10 }} style={Styles.dropdownItem}><Text style={{ fontSize: 16, color: selectedLanguage === 'Hindi' ? 'green' : 'black' }}>Hindi</Text></TouchableOpacity>
                 </View>
-            </TouchableOpacity>
-        </Modal>)
+            </View>
+        </Modal>);
     }
 }
