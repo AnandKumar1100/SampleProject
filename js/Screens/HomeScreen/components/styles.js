@@ -138,6 +138,6 @@ export const Styles = StyleSheet.create({
         paddingVertical: 16,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingRight: 24
+        paddingRight: 40
     }
 });

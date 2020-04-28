@@ -6,15 +6,7 @@ import { Styles } from "./styles";
 import Icon from 'react-native-vector-icons/Feather';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-const politics = require('../../../assets/images/Politics.png')
-const entertainment = require('../../../assets/images/Entertainment.png')
-const auto = require('../../../assets/images/Auto.png')
-const hatke = require('../../../assets/images/Hatke.png')
-const hike = require('../../../assets/images/hike.png')
-const indiaGate = require('../../../assets/images/IndiaGate.png')
-const international = require('../../../assets/images/Travel.png')
-const science = require('../../../assets/images/Science.png')
+import { Categories, Topics } from './dummyData'
 export default class HomeScreen extends Component {
 
     render() {
@@ -36,7 +28,7 @@ export default class HomeScreen extends Component {
                     <Text style={Styles.categoriesText}>CATEGORIES</Text>
                     <View style={Styles.horizontalLine} />
                     <FlatList
-                        data={[{ iconName: 'feed', title: 'MY FEED', id: 1 }, { iconName: 'newspaper-o', title: 'ALL NEWS', id: 2 }, { iconName: 'star', title: 'TOP STORIES', id: 3 }, { iconName: 'fire', title: 'TRENDING', id: 4 }, { iconName: 'bookmark', title: 'BOOKMARKS', id: 5 }, { iconName: 'eye-slash', title: 'UNREAD', id: 6 }]}
+                        data={Categories}
                         renderItem={this.renderCategories}
                         contentContainerStyle={Styles.categoriesListContainer}
                         horizontal={true}
@@ -48,7 +40,7 @@ export default class HomeScreen extends Component {
                     <Text style={Styles.suggestTopicsText}>SUGGESTED TOPICS</Text>
                     <View style={Styles.suggestTopicsHorizontalLine} />
                     <FlatList
-                        data={[{ id: 1, imageName: indiaGate, title: 'CAA' }, { id: 2, imageName: international, title: 'Coronavirus' }, { id: 3, imageName: indiaGate, title: 'India' }, { id: 4, imageName: hatke, title: 'Business' }, { id: 5, imageName: politics, title: 'Politics' }, { id: 6, imageName: entertainment, title: 'Sports' }, { id: 7, imageName: science, title: 'Technology' }, { id: 8, imageName: hike, title: 'Startups' }, { id: 9, imageName: entertainment, title: 'Travel' }, { id: 10, imageName: hatke, title: 'Hatke' }, { id: 11, imageName: international, title: 'International' }, { id: 12, imageName: auto, title: 'Automobile' }, { id: 13, imageName: science, title: 'Science' }]}
+                        data={Topics}
                         renderItem={this.renderTopics}
                         numColumns={3}
                         contentContainerStyle={Styles.suggestTopicsList}
@@ -64,9 +56,23 @@ export default class HomeScreen extends Component {
 
     renderCategories = ({ item }) => {
         return (<View style={Styles.eachCategoriesContainer}>
-            {item.iconName === 'star' || item.iconName === 'newspaper-o' || item.iconName === 'news' || item.iconName === 'bookmark' || item.iconName === 'eye-slash' || item.iconName === 'feed' ? <FontAwesomeIcon name={item.iconName} size={28} color={'#379aff'}/> : item.iconName === 'fire' ? <MaterialCommunityIcons name={item.iconName} size={28} color={'#379aff'}/> : <Icon name={item.iconName} size={28} color={'#379aff'}/>}
+            {this.renderCategoriesIcon(item.iconName)}
             <Text style={{ paddingTop: 16, color: item.id == 1 ? '#379aff' : '#6b6b6b', fontSize: 12, fontWeight:item.id == 1 ? 'bold' : 'normal'}}>{item.title}</Text>
         </View>)
+    }
+
+    renderCategoriesIcon = (type) => {
+        switch (type) {
+            case 'star':
+            case 'newspaper-o':
+            case 'news':
+            case 'bookmark':
+            case 'eye-slash':
+            case 'feed':
+                return <FontAwesomeIcon name={type} size={28} color={'#379aff'}/>;
+            case 'fire':
+                return <MaterialCommunityIcons name={type} size={28} color={'#379aff'}/>;
+        }
     }
 
     renderTopics = ({ item }) => {
