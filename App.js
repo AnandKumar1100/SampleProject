@@ -19,14 +19,11 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 const sagaMiddleware = createSagaMiddleware();
 let middlewares = compose(applyMiddleware(sagaMiddleware));
 let store = createStore(allReducers(), middlewares);
-let persistor = persistStore(store);
 
 export default class App extends React.Component {
   render() {
     return (<Provider store={store}>
-      <PersistGate persistor={persistor}>
         <AppNavigator />
-      </PersistGate>
     </Provider>);
   }
 };

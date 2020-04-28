@@ -1,11 +1,12 @@
 import React from 'react';
+import { Text, View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/Feather';
 
 const Stack = createStackNavigator();
 
 import HomeScreen from '../Screens/HomeScreen/container';
-import Dropdown from '../commonComponents/Dropdown/container';
 
 function AppNavigator() {
     return (
@@ -15,15 +16,21 @@ function AppNavigator() {
             name="Home"
             component={HomeScreen}
             options={{
-              headerTitle: 'Home',
+              headerTitle: 'Discover',
+              headerTitleAlign:'center',
               headerStyle:{shadowOffset: {
                 width: 0,
                 height: 2
               }
               },
-              headerRightContainerStyle:{marginRight:16},
+              headerRightContainerStyle: { marginRight: 2 },
+              headerLeftContainerStyle: {marginLeft: 12},
+              headerLeft: () => (<Icon name="settings" size={20} color={'#379aff'}/>),
               headerRight: () => (
-                <Dropdown/>
+                <View style={{flexDirection:'row', alignItems:'center'}}>
+                <Text style={{fontSize: 16}}>My Feed</Text>
+                  <Icon name="chevron-right" size={22} color={'#379aff'}/>
+                  </View>
               )
             }}/>
         </Stack.Navigator>
